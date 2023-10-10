@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+    *{
+    margin:0%;
+    padding:0%;
+    border:border-box;
+}
+
+body{
+    height:100vh;
+    width:100vw;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+.calculator-body{
+    height:700px;
+    width:450px;
+    border:2px solid black;
+    border-radius:26px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(0, 0, 0);;
+
+}
+
+input[type=text]{
+    height:80px;
+    width:380px;
+    margin-bottom: 30px;
+    background-color:  rgb(99, 99, 99);
+    color:white;
+    font-size: 55px;
+}
+
+::placeholder{
+    color:white;
+    position:absolute;
+    right:0px;
+}
+
+
+
+.button1{
+    height:80px;
+    width:80px;
+    border-radius:50%;
+    border:2px solid black;
+    margin:10px 6px 0px 6px;
+    color:rgb(255, 255, 255);
+    background-color: rgb(99, 99, 99);
+    font-size:30px;
+    font-weight: 700;
+    cursor:grab;
+}
+
+.btn-1{
+    background-color:rgb(250, 165, 6) ;
+}
+
+.btn-0{
+       height:80px;
+       width:180px;
+       border-radius: 40px;
+}
+
+.btn-2{
+    background-color: rgb(193, 193, 193);
+    color:rgb(0, 0, 0);
+}
+
+.clock{
+    height:50px;
+    width:200px;
+    border:2px solid white;
+    border-radius: 20px;
+    box-shadow:2px 5px 8px rgb(236, 236, 236);
+    margin-bottom: 20px;
+    color:white;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.calender{
+    font-size: 18px;
+}
+
+.time{
+    font-size: 25px;
+}
+
+@media(max-width:465px){
+       input[type=text]{
+        height:75px;
+        width:300px;
+        font-size: 60px;
+       }
+}
+
+
+@media(max-width:465px){
+    .calculator-body{
+        height:630px;
+        width:350px;
+
+    }
+}
+
+@media(max-width:465px){
+    .button1{
+        height:67px;
+        width:67px;
+        margin:5px 5px 0px 2px;
+        font-size: 30px;
+
+    }
+}
+
+@media(max-width:465px){
+    .btn-0{
+        height:67px;
+        width:150px;
+    }
+
+}
+
+@media(max-width:465px){
+    .clock{
+        height:50px;
+        width:190px;
+        font-size: smaller;
+    }
+}
+
+@media(max-width:465px){
+    .calender{
+        font-size: 20px;
+    }
+}
+
+@media(max-width:465px){
+    .time{
+        font-size: 25px;
+    }
+}
+    </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>calculator</title>
+</head>
+<body>
+    <div class="calculator-body">
+        <input type="text" placeholder="0" id="display">
+
+        <div class="clock" id="timer">
+            <div class="calender">
+                <span id="year">year</span>
+                <span>-</span>
+                <span id="month">month</span>
+                <span>-</span>
+                <span id="date">day</span>
+            </div>
+            
+            <div class="time">
+            <span id="hrs">00</span>
+            <span>:</span>
+            <span id="mins">00</span>
+            <span >:</span>
+            <span id="secs">00</span>
+            </div>
+        </div>
+
+    <div class="ist-row">
+        <button class="button1 btn-2" onclick="clr()">C</button>
+        <button class="button1 btn-2"onclick="back('')">←</button>
+        <button class="button1" onclick="sqrt()">sq</button>
+        <button class="button1 btn-1" onclick="keys('/')">/</button>
+       </div>
+
+        <div clas="2nd-row">
+            <button class="button1" onclick="keys(7)">7</button>
+            <button class="button1" onclick="keys(8)">8</button>
+            <button class="button1" onclick="keys(9)">9</button>
+            <button class="button1 btn-1" onclick="keys('+')">+</button>
+    </div>
+
+
+    <div clas="3rd-row">
+        <button class="button1" onclick="keys(4)">4</button>
+        <button class="button1" onclick="keys(5)">5</button>
+        <button class="button1" onclick="keys(6)">6</button>
+        <button class="button1 btn-1" onclick="keys('*')">x</button>
+    </div>
+
+
+        <div clas="4th-row">
+            <button class="button1" onclick="keys(1)">1</button>
+            <button class="button1" onclick="keys(2)">2</button>
+            <button class="button1" onclick="keys(3)">3</button>
+            <button class="button1 btn-1" onclick="keys('-')">-</button>
+</div>
+
+
+        <div clas="5th-row">
+        <button class="button1 btn-0" onclick="keys(0)">0</button>
+        <button class="button1" onclick="keys('.')">.</button>
+        <button class="button1 btn-1" onclick="calculate('=')">=</button>
+       </div>
+
+
+     </div>
+
+     <script>
+
+     let disp=document.getElementById('display');
+
+let keys=(num)=>{
+    disp.value+=num;
+    let keys=document.getElementById('keys');
+    // keys.style.boxShadow=10px 10px solid white;
+}
+
+let calculate=()=>{
+    try {
+        disp.value=eval(disp.value);
+    } 
+    catch (error) {
+        alert("Enter valid values");
+    } 
+}
+
+
+
+let clr=()=>{
+    disp.value=" ";
+}
+
+let back=()=>{
+    disp.value=disp.value.slice(0,-1);
+}
+
+let sqrt=(num)=>{
+    disp.value=(disp.value*disp.value);
+}
+
+
+function clock(){
+    let clock=new Date();
+    let hour=clock.getHours();
+    console.log(hour);
+    document.getElementById('hrs').innerHTML=hour;
+
+    let min=clock.getMinutes();
+    document.getElementById('mins').innerHTML=min;
+
+    let sec=clock.getSeconds();
+    document.getElementById('secs').innerHTML=sec;
+
+    
+
+    let yr=new Date();
+    let years=yr.getFullYear();
+    document.getElementById('year').innerHTML=years;
+
+    const month = ["Jan","Feb","Mar","Apr","May","June","July","Aug","Sept","Oct","Nov","Dec"];
+    let months=new Date;
+   let mon=month[months.getMonth()];
+    document.getElementById('month').innerHTML=mon;
+
+    let day=new Date().getDate();
+    document.getElementById('date').innerHTML=day;
+}
+setInterval(clock,1000);
+
+</script>
+    
+</body>
+</html>
